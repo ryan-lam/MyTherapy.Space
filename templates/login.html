@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/signup.css">
+        <title>Medical Help</title>
+    </head>
+    <body >
+        <nav class="navbar navbar-light bg-dark">
+            <div class="container-fluid">
+                <h1 style="margin-left: 20px;"><a href="/" class="text-white" style="text-decoration: none;">🌺 MyTherapy.Space</a></h1>
+                <div class="float-md-end me-5">
+                    <a style="text-decoration: none; margin-right: 10px;" href="/tos"><button class="btn btn-outline-light topcustom" style="width: 100px;">About</button></a> 
+                    <a style="text-decoration: none" href="/"><button class="btn btn-outline-light topcustom" style="width: 100px;">Sign Up</button></a> 
+                </div>
+            </div>
+        </nav>
+        
+        <div class="leftLogin" >
+            <h1>Did You Know:</h1>
+            <hr size="5">
+            <h4>{{loginfact}}</h4>
+        </div>
+
+
+        <div class="signup-content" style="margin-top: 10%;">
+            <form method="POST" id="signup-form" class="signup-form" action="/loging">
+                <h2 class="form-title" name="type">Sign In</h2>
+                
+                <div class="form-group">
+                    <input type="text" class="form-input" name="name" id="name" placeholder="Username" required/>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-input" name="password" id="password" placeholder="Password" required/>
+                    <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                </div>
+
+                {% if loginmessage == "False" %}
+                        <p style="color: red;"><small>Sign-in attempt failed. Fields are case sensitive. Please check your sign-in information and retry.</small></p>
+                        <br>
+                {% endif %}
+                <div class="form-group">
+                    <button class="form-submit">Sign In</button>
+                </div>
+            </form>
+            <!-- <p class="loginhere">
+                Have already an account ? <a href="#" class="loginhere-link">Login here</a>
+            </p> -->
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+</html>

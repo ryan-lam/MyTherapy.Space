@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/signup.css">
+        <title>Medical Help</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark" style="height: 5%;">
+            <div class="container-fluid">
+                <h1 style="margin-left: 20px;"><a href="/" class="text-white" style="text-decoration: none;">🌺 MyTherapy.Space</a></h1>
+                <div class="float-md-end me-5">
+                    <a style="text-decoration: none; margin-right: 10px;" href="/tos"><button class="btn btn-outline-light topcustom" style="width: 100px;">About</button></a> 
+                    <a style="text-decoration: none" href="/login"><button class="btn btn-outline-light topcustom" style="width: 100px;">Sign In</button></a> 
+                </div>
+            </div>
+        </nav>
+
+       
+            <div class="leftLogin">
+                <h1>Connect with your Therapist</h1>
+                <h1>Anywhere, Anytime</h1>
+                <hr size="5">
+                <h4>• Track & Analyze Your Emotions</h4>
+                <h4>• Talk to Your Therapist Where Ever You Are</h4>
+                <h4>• Connect and Share Your Journey With Others </h4>
+                <h4>• Be Happy and Stay Happy</h4>
+            </div>
+
+    
+            <div class="signup-content">
+                <form method="POST" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Create Your Account</h2>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="name" id="name" placeholder="Username" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" name="email" id="email" placeholder="Email Address" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Password" required/>
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Re-enter Password" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree to the <a href="/tos" class="term-service">Terms of Service</a></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                    </div>
+                </form>
+                <!-- <p class="loginhere">
+                    Have already an account ? <a href="#" class="loginhere-link">Login here</a>
+                </p> -->
+            </div>
+        
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+</html>

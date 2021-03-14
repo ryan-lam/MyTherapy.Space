@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../static/dashboards.css">
+        <style>
+            body{
+                /* background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%); */
+                background-color: white;
+            }
+
+            #chart{
+                width: 90%; 
+                height: 350px; 
+                margin-left: auto; 
+                margin-right: auto; 
+                display: block; 
+                margin-top: 30px;
+                
+            }
+            .checkIn{
+                
+            }
+        </style>
+        <title>Medical Help</title>
+        <meta charset="UTF-8">
+
+        <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="container-fluid">
+                <h1 style="margin-left: 20px;"><a href="/" class="text-white" style="text-decoration: none;">🌺 MyTherapy.Space</a></h1>
+                <div class="float-md-end me-5">
+                    
+                    <!-- <button class="btn btn-outline-light topcustom" style="width: 100px;"><a style="text-decoration: none; color: inherit;" href="/">Sign Out</a></button> -->
+                    <a style="text-decoration: none" href="/"><button class="btn btn-outline-light topcustom" style="width: 100px;">Sign Out</button></a>
+
+                </div>
+            </div>
+        </nav>
+
+        <h1 style="margin-top: 10px; margin-left: 20px;">Hello, {{ patient }}!</h1>
+        
+        <div style="height: 510px;">
+            <div style="float: left; width: 47%; margin-left: 2%; background-color: aliceblue; border-radius: 30px; height: 100%;">
+                <h2 style="text-align: center; margin-top: 10px;">{{graph_title}}</h2>
+                <form action="/dashboard" method="post" name="name" style="text-align: center; margin-top: 20px; margin-left: 20px;">
+                    <!-- <a style="text-decoration: none" ><button class="btn btn-outline-dark topcustom" style="width: 200px;" name="content" value="30">Get Graph 30 Days</button></a>
+                    <a style="text-decoration: none" ><button class="btn btn-outline-dark topcustom" style="width: 200px;" name="content" value="14">Get Graph 14 Days</button></a>
+                    <a style="text-decoration: none" ><button class="btn btn-outline-dark topcustom" style="width: 200px;" name="content" value="7">Get Graph 7 Days</button></a> -->
+                    <button type="submit" class="btn btn-outline-dark topcustom" style="width: 150px;" name="content" value="7">7 Days</button>
+                    <button type="submit" class="btn btn-outline-dark topcustom" style="width: 150px;" name="content" value="14">14 Days</button>
+                    <button type="submit" class="btn btn-outline-dark topcustom" style="width: 150px;" name="content" value="30">30 Days</button>
+                </form>
+                <canvas id="chart"></canvas>
+            </div>
+
+
+            <div style="float: right; margin-right: 2%; width: 47%; background-color: aliceblue; border-radius: 30px; height: 100%;">
+                <h2 style="text-align: center; margin-top: 10px;">Check-In Form</h2>
+
+                <div>
+                    <form action="/dashboardcheckin" method="POST" name="checkin">
+                        <div style="width: 90%; margin-top: 10px; margin-left: 5%;">
+                            <input type="range" class="form-range" min="1" max="7" id="myRange" name="mood">
+                            <div class="d-flex justify-content-between">
+                                <p style="font-size: 30px;" >&#128542</p>
+                                <p style="font-size: 20px;">Happy Value: <span id="demo">1</span></p>
+                                <p style="font-size: 30px;">&#128513</p>
+                            </div>
+                        </div>
+                        <p style="font-size: 20px; margin-left: 30px;">Check if you have done the following:</p>
+                        
+                        <div class="container" style="font-size:20x; display: block; margin-left: 30px;">
+                            <div class="row">
+                            <div class="col">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="brushed">
+                                <label class="form-check-label" for="defaultCheck1">Brushed Teeth 🦷</label>
+                            </div>
+                            <div class="col">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="showered">
+                                <label class="form-check-label" for="defaultCheck1">Took a Shower 🚿</label>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="walked">
+                                    <label class="form-check-label" for="defaultCheck1">Took a Walk 👣</label>
+                                </div>
+                                <div class="col">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="ate">
+                                    <label class="form-check-label" for="defaultCheck1">Ate a Nutritious Meal 🍽</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="slept">
+                                    <label class="form-check-label" for="defaultCheck1">Got Adequate Amount of Sleep 😴</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 20px; margin-top: 20px; width: 90%; margin-left: 30px;">Did you encounter any problems or inconveniences today? If so, how did you resolve it?</p>
+                        <div style="width: 90%; margin: auto; ">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="txt"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success topcustom" style="width: 150px; display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;" name="content" value="7">Submit CheckIn</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; height: 550px;">
+            <div style="float: left; width: 47%; margin-left: 2%; height: 100%; background-color: aliceblue; border-radius: 30px;">
+                <h3 style="text-align: center; margin-top: 10px;">Daily Checklist (Last 14 Days)</h3>
+                <table style="display: block; margin-top: 20px;" class="container">
+                    <tr class="row">
+                        <th class="col">Date</th>
+                        <th class="col">Brushed teeth</th>
+                        <th class="col">Took a shower</th>
+                        <th class="col">Took a walk</th>
+                        <th class="col">Eat a nutritious meal</th>
+                        <th class="col">Get an adequate amount of sleep</th>
+                    </tr>
+                    {% for i in range(13,-1,-1) %}
+                    <tr class="row">
+                        <td class="col">{{days_14[i]}}</td>
+                        <td class="col">{{task_14[0][i]}}</td>
+                        <td class="col">{{task_14[1][i]}}</td>
+                        <td class="col">{{task_14[2][i]}}</td>
+                        <td class="col">{{task_14[3][i]}}</td>
+                        <td class="col">{{task_14[4][i]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div style=" float: right; width: 47%; margin-right: 2%; height: 100%; background-color: aliceblue; border-radius: 30px;">
+                <h3 style="text-align: center; margin-top: 10px;">Problems, Solutions, and Insights</h3>
+                {% for i in problems_and_sol %}
+                <p style="width: 90%; margin-left: 5%;">{{i}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        
+
+        <div style="width: 100%;margin-left: 50px; margin: 10px; background-color: aliceblue; text-decoration: none;">
+            <div style="margin-left: 50px; width: 500px;">
+            <h3 style="margin-top: 10px;">Need Help?</h3>
+            <p>For Emergencies<br>• 911<br>• 833-456-4566</p>
+            <p>For Non-Emergencies<br>• <a href="https://www.mentalhealth.gov/">https://www.mentalhealth.gov/</a>
+                <br>• <a href="https://kidshelpphone.ca/">https://kidshelpphone.ca/</a></p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+                // bar chart data
+            var barData = {
+                labels : [
+                {% for item in labels %}
+                    "{{ item }}",
+                {% endfor %}
+                ],
+
+                datasets : [{
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                bezierCurve : false,
+                data : [
+                {% for item in values %}
+                    {{ item }},
+                    {% endfor %}]
+                }]
+            }
+            Chart.defaults.global.animationSteps = 50;
+            Chart.defaults.global.tooltipYPadding = 16;
+            Chart.defaults.global.tooltipCornerRadius = 5;
+            Chart.defaults.global.tooltipTitleFontStyle = "normal";
+            Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+            Chart.defaults.global.animationEasing = "easeOutBounce";
+            Chart.defaults.global.responsive = false;
+            Chart.defaults.global.scaleLineColor = "black";
+            Chart.defaults.global.scaleFontSize = 16;
+            // get bar chart canvas
+            var mychart = document.getElementById("chart").getContext("2d");
+            steps = 8
+            max = {{ max }}
+            // draw bar chart
+            var LineChartDemo = new Chart(mychart).Line(barData, {
+                scaleOverride: true,
+                scaleSteps: steps,
+                scaleStepWidth: Math.ceil(max / steps),
+                scaleStartValue: 0,
+                scaleShowVerticalLines: true,
+                scaleShowGridLines : true,
+                barShowStroke : true,
+                scaleShowLabels: true,
+            });
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+</html>
